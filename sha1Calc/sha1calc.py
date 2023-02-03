@@ -12,13 +12,13 @@ def process_folder(folder_path):
     with open("sha1_checksums.txt", "w") as f:
         for filename in os.listdir(folder_path):
             file_path = os.path.join(folder_path, filename)
-            if os.path.isfile(file_path):
+            if os.path.isfile(file_path) and (filename.endswith(".apk") or filename.endswith(".ipa")):
                 sha1 = extract_sha1(file_path)
                 f.write(f"{filename}: {sha1}\n")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python sha1calc.py <folder_path>")
+        print("Usage: python sha1_extractor.py <folder_path>")
         sys.exit(1)
 
     folder_path = sys.argv[1]
